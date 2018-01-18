@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Livros > Listar</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Livros</li>
+        </ol>
+    </nav>
+    <p>
+        <a th:href="@{/livros/novo}" class="btn btn-sm btn-info" title="Adicionar">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </p>
+</div>
+<div layout:fragment="content">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>Capa</td>
+            <td>ID</td>
+            <td>Título</td>
+            <td>Páginas</td>
+            <td th:if="${#request.isUserInRole('ADMIN')}">Ações</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${livros.empty}">
+            <td colspan="5">Não há livros cadastrados.</td>
+        </tr>
+        <tr th:each="livro : ${livros}">
+            <td>
+                <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
+                <img th:unless="${livro.capa}" th:src="@{'../img/unless.jpg'}" width="100px" />
+            </td>
+            <td th:text="${livro.id}">1</td>
+            <td th:text="${livro.nome}">Título</td>
+            <td th:text="${livro.quantidadePaginas}">Quantidade de Páginas</td>
+            <td th:if="${#request.isUserInRole('ADMIN')}">
+                <a href="#" th:href="@{'/livros/alterar/'+${livro.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>
+
+                <a href="#" th:href="@{'/livros/excluir/'+${livro.id}}" class="btn btn-danger" title="Excluir" > <i class="glyphicon glyphicon-remove"></i> Excluir </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

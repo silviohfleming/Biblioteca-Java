@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Autores > Listar</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Autores</li>
+        </ol>
+    </nav>
+    <p>
+        <a th:href="@{/autores/novo}" class="btn btn-sm btn-info" title="Adicionar">
+            <i class="glyphicon glyphicon-plus"></i> Adicionar
+        </a>
+    </p>
+</div>
+<div layout:fragment="content">
+    <table class="table table-bordered">
+        <thead>
+            <td>ID</td>
+            <td>Nome</td>
+            <td>Ações</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${autores.empty}">
+            <td colspan="3">Não há autores cadastrados.</td>
+        </tr>
+        <tr th:each="autor : ${autores}">
+            <td th:text="${autor.id}">1</td>
+            <td th:text="${autor.nome}">Nome</td>
+            <td>
+                <a href="#" th:href="@{'/autores/alterar/'+${autor.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>
+
+                <a href="#" th:href="@{'/autores/excluir/'+${autor.id}}" class="btn btn-danger" title="Excluir" > <i class="glyphicon glyphicon-remove"></i> Excluir </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
