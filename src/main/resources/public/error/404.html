@@ -1,15 +1,23 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout">
+<html>
 <head>
     <meta charset="UTF-8" />
-    <title>Página não encontrada</title>
+    <title>Página Não Encontrada</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" />
 </head>
 <body>
- <h1 layout:fragment="header">Página Não Encontrada!</h1>
- <div layout:fragment="content">
-     Conteúdo 404.
- </div>
+<div class="container">
+    <nav class="navbar navbar-default navbar-static-top">
+        <ul class="nav navbar-nav">
+            <li><a class="brand" href="/" href="#"> <i class="glyphicon glyphicon-arrow-left"></i> Voltar </a></li>
+        </ul>
+
+
+    </nav>
+    <h1>Página Não Encontrada</h1>
+    <div>...</div>
+</div>
 </body>
 </html>
