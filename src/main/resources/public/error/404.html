@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="UTF-8" />
+    <title>Página não encontrada</title>
 </head>
 <body>
- <h1>Página Não Encontrada!</h1>
+ <h1 layout:fragment="header">Página Não Encontrada!</h1>
+ <div layout:fragment="content">
+     Conteúdo 404.
+ </div>
 </body>
 </html>
