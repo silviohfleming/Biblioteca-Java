@@ -9,6 +9,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/uploaded-images/**")
-                .addResourceLocations("file:///C:/Users/tuTe-PC/Desktop/JAVA AULA/Trabalho/livros/uploaded-images/");
+                .addResourceLocations("file:///C:/Users/tuTeNB/Documents/github/Biblioteca-Java/uploaded-images/");
     }
 }
