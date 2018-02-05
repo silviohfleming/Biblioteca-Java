@@ -24,8 +24,8 @@ public class LoginValidator implements Validator {
 
         Usuario usuario = (Usuario) o;
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "NotEmpty");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "username", "Field.Required");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "Field.Required");
 
         if (usuarioService.findByUsername(usuario.getUsername()) == null) {
             errors.rejectValue("username", "NotExist.userForm.username");

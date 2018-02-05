@@ -27,7 +27,7 @@
             <td>ID</td>
             <td>Título</td>
             <td>Páginas</td>
-            <td th:if="${#request.isUserInRole('ADMIN')}">Ações</td>
+            <td>Ações</td>
         </tr>
         </thead>
         <tbody>
@@ -42,7 +42,8 @@
             <td th:text="${livro.id}">1</td>
             <td th:text="${livro.nome}">Título</td>
             <td th:text="${livro.quantidadePaginas}">Quantidade de Páginas</td>
-            <td th:if="${#request.isUserInRole('ADMIN')}">
+            <!--<td th:if="${#request.isUserInRole('ADMIN')}">-->
+            <td>
                 <a href="#" th:href="@{'/livros/alterar/'+${livro.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>
 
                 <a href="#" th:href="@{'/livros/excluir/'+${livro.id}}" class="btn btn-danger" title="Excluir" > <i class="glyphicon glyphicon-remove"></i> Excluir </a>

@@ -19,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     @Autowired
@@ -34,10 +34,9 @@ public class UsuarioController {
     @Autowired
     private LoginValidator loginValidator;
 
-    @GetMapping("/autentication")
+    @GetMapping("/login")
     public ModelAndView login() {
-
-        return new ModelAndView("usuarios/form", "userForm", new Usuario());
+        return new ModelAndView("login", "userForm", new Usuario());
     }
 
     @PostMapping("/autentication")
@@ -46,10 +45,40 @@ public class UsuarioController {
         loginValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
-            return new ModelAndView("usuarios/form");
+            return new ModelAndView("login");
         }
+
         securityService.login(userForm.getUsername(), userForm.getPassword());
-        return new ModelAndView("redirect:/usuarios/list");
+
+        return new ModelAndView("redirect:/");
+
+    }
+
+    @GetMapping(value = "/register")
+    public ModelAndView register() {
+        return new ModelAndView("register", "userForm", new Usuario());
+    }
+
+    @PostMapping(value = "/register")
+    public ModelAndView registerForm(@ModelAttribute("userForm") Usuario userForm, BindingResult bindingResult, Model model) {
+
+        usuarioValidator.validate(userForm, bindingResult);
+
+        if (bindingResult.hasErrors()) {
+            return new ModelAndView("register");
+        }
+
+        String password = userForm.getPassword();
+
+        usuarioService.save(userForm);
+
+        try {
+            securityService.login(userForm.getUsername(), password);
+            return new ModelAndView("redirect:/");
+
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/usuarios/login");
+        }
     }
 
     @GetMapping("/list")
@@ -61,36 +90,7 @@ public class UsuarioController {
     public ModelAndView listadmin(Usuario usuario) {
 
         List<Usuario> usuarios = usuarioService.findAll();
-        return new ModelAndView("/usuarios/listadmin","usuarios", usuarios);
-    }
-
-    @GetMapping(value = "/registration")
-    public ModelAndView registration() {
-
-        return new ModelAndView("/usuarios/registration", "userForm", new Usuario());
-    }
-
-    @PostMapping(value = "/registration")
-    public ModelAndView registrationform(@ModelAttribute("userForm") Usuario userForm, BindingResult bindingResult, Model model) {
-
-        usuarioValidator.validate(userForm, bindingResult);
-
-        if (bindingResult.hasErrors()) {
-            return new ModelAndView("usuarios/registration");
-        }
-
-        String password = userForm.getPassword();
-
-        usuarioService.save(userForm);
-
-        try {
-            securityService.login(userForm.getUsername(), password);
-            return new ModelAndView("redirect:/usuarios/list");
-
-        } catch (Exception e) {
-
-            return new ModelAndView("redirect:/usuarios/login");
-        }
+        return new ModelAndView("/usuarios/listadmin", "usuarios", usuarios);
     }
 
     @GetMapping("/logout")
@@ -98,11 +98,11 @@ public class UsuarioController {
 
         HttpSession session = request.getSession(false);
         SecurityContextHolder.clearContext();
-        if (session != null){
+        if (session != null) {
             session.invalidate();
         }
 
-        return "redirect:/usuarios/autentication";
+        return "redirect:/usuarios/login";
     }
 
 }

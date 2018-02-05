@@ -4,6 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <title>Biblioteca de livros</title>
+
+    <link rel="shortcut icon" href="https://getbootstrap.com/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="https://getbootstrap.com/favicon.ico" type="image/x-icon">
+
     <!-- Bootstrap -->
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" />
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap-theme.min.css}" />
@@ -18,18 +22,14 @@
                 /></a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a class="brand" th:href="@{/livros/list}" href="#"> Livros
-            </a></li>
-            <li><a class="brand" th:href="@{/autores/list}" href="#"> Autores
-            </a></li>
-            <li><a class="brand" th:href="@{/usuarios/list}" href="#"> Usuários
-            </a></li>
-            <li><a class="brand" th:href="@{/usuarios/logout}" href="#"> Logout
-            </a></li>
+            <li><a class="brand" th:href="@{/livros/list}" href="#"> Livros</a></li>
+            <li><a class="brand" th:href="@{/autores/list}" href="#"> Autores</a></li>
+            <li><a class="brand" th:href="@{/usuarios/list}" href="#"> Usuários</a></li>
         </ul>
 
         <div class="navbar-header text-right" style="float: right;padding-top:15px; padding-right: 15px; ">
-            <span class="label label-default brand" style="font-size: 14px;">Olá, [[${#httpServletRequest.remoteUser}]]!</span>
+            <span class="label label-default brand" style="font-size: 14px; background-color: red;">Olá, [[${#httpServletRequest.remoteUser}]]!</span>
+            <a class="brand" th:href="@{/usuarios/logout}" href="#"><i class="glyphicon glyphicon-log-out"></i> Sair</a>
         </div>
 
     </nav>

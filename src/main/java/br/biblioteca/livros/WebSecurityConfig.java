@@ -33,16 +33,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/usuarios/registration").permitAll()
+                .antMatchers(HttpMethod.GET, "/usuarios/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/usuarios/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/usuarios/autentication").permitAll()
+                .antMatchers(HttpMethod.GET, "/usuarios/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/usuarios/register").permitAll()
                 .antMatchers(HttpMethod.POST, "/usuarios/registration").permitAll()
-                .antMatchers(HttpMethod.GET, "/usuarios/list").hasRole("BASIC")
-                .antMatchers(HttpMethod.GET, "/usuarios/listadmin").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/livros/excluir/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/livros/alterar/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/autores/excluir/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/autores/alterar/**").hasRole("ADMIN")
+                //.antMatchers(HttpMethod.GET, "/usuarios/listadmin").hasRole("ADMIN")
                 .anyRequest().authenticated()
-                .and().formLogin().loginPage("/usuarios/autentication").permitAll()
+                .and().formLogin().loginPage("/usuarios/login").permitAll()
                 .and().logout().permitAll();
     }
 

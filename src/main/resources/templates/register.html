@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
-    <title>Login</title>
+    <title>Registrar</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css" />
@@ -29,9 +30,9 @@
 
     <div class="row" style="margin-top:20px">
         <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-            <form id="userForm" th:action="@{/usuarios/autentication}" th:object="${userForm}" action="#" method="post">
+            <form id="userForm" th:action="@{/usuarios/register}" th:object="${userForm}" action="#" method="post">
                 <fieldset>
-                    <h2>Faça o seu login...</h2>
+                    <h2>Faça o seu registro...</h2>
                     <hr class="colorgraph">
                     <div class="form-group">
                         <label><i class="glyphicon glyphicon-user"></i> Usuário:</label>
@@ -51,10 +52,10 @@
                     <hr class="colorgraph">
                     <div class="row">
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <button type="submit" class="btn btn-lg btn-success btn-block" ><i class="glyphicon glyphicon-ok"></i> Entrar</button>
+                            <button type="submit" class="btn btn-lg btn-success btn-block" ><i class="glyphicon glyphicon-ok"></i> Registrar</button>
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-6">
-                            <a th:href="@{/usuarios/register}" href="#" class="btn btn-lg btn-primary btn-block"><i class="glyphicon glyphicon-pencil"></i> Registrar</a>
+                            <a th:href="@{/usuarios/login}" href="#" class="btn btn-lg btn-primary btn-block"><i class="glyphicon glyphicon-chevron-left"></i> Voltar</a>
                         </div>
                     </div>
                 </fieldset>

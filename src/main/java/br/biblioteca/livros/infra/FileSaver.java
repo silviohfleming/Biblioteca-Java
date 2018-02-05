@@ -11,7 +11,7 @@ public class FileSaver {
 
     public String write(String baseFolder, MultipartFile file) {
 
-        String realPath = "C:/Users/tuTeNB/Documents/github/Biblioteca-Java/" + baseFolder;
+        String realPath = "C:/Users/tuTeNB/Documents/github/Biblioteca-Java/uploaded-images/" + baseFolder;
 
         File folder = new File(realPath);
         if(!folder.exists()){
