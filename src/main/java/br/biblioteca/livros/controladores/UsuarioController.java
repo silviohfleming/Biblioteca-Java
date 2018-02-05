@@ -82,8 +82,10 @@ public class UsuarioController {
     }
 
     @GetMapping("/list")
-    public ModelAndView list() {
-        return new ModelAndView("/usuarios/list");
+    public ModelAndView list(Usuario usuario) {
+
+        List<Usuario> usuarios = usuarioService.findAll();
+        return new ModelAndView("/usuarios/list", "usuarios", usuarios);
     }
 
     @GetMapping("/listadmin")

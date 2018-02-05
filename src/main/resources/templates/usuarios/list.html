@@ -1,21 +1,49 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
 <head>
     <meta charset="UTF-8" />
-    <title>LIST</title>
+    <title>Usuarios > Listar</title>
 </head>
 <body>
-<h1>Lista Basica</h1>
-<h2>   Acesso Liberado <span sec:authentication="name"></span></h2>
 
-<div>
-    <ul>
-        <li><a th:href="@{/usuarios/list}" href="#"> Lista Basica </a></li>
-        <li sec:authorize="hasAuthority('ROLE_ADMIN')" ><a th:href="@{/usuarios/listadmin}" href="#"> Lista Admin </a></li>
-        <li><a th:href="@{/usuarios/logout}" href="#"> Logout </a></li>
-    </ul>
+<div layout:fragment="header">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+        </ol>
+    </nav>
+</div>
+<div layout:fragment="content">
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>Usuário</td>
+            <td>Senha</td>
+        </tr>
+        </thead>
+        <tbody>
+        <!--<tr th:if="${usuario.empty}">-->
+            <!--<td colspan="5">Não há usuarios cadastrados.</td>-->
+        <!--</tr>-->
+        <tr th:each="usuario : ${usuarios}">
+            <td th:text="${usuario.username}">Username</td>
+            <td th:text="${usuario.password}">Password</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--<table class="table table-bordered">-->
+        <!--<tr th:each="usuario : ${usuarios}">-->
+            <!--<td th:text="${usuario.username}">Username</td>-->
+            <!--<td th:text="${usuario.password}">Password</td>-->
+        <!--</tr>-->
+    <!--</table>-->
+    <p>Obs: *Para realizar um novo cadastro, favor deslogar e se registrar!</p>
+    <p>**ROLES não aplicadas nesse projeto!</p>
+
 </div>
 </body>
 </html>

@@ -22,8 +22,11 @@ public class UsuarioServiceImpl implements UsuarioService {
     public void save(Usuario usuario) {
 
         usuario.setPassword(bCryptPasswordEncoder.encode(usuario.getPassword()));
+
         usuario.getRoles().add(new Role("ROLE_BASIC"));
+
         usuarioRepository.save(usuario);
+
     }
 
     @Override

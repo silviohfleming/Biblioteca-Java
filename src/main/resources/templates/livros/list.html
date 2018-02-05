@@ -42,7 +42,6 @@
             <td th:text="${livro.id}">1</td>
             <td th:text="${livro.nome}">Título</td>
             <td th:text="${livro.quantidadePaginas}">Quantidade de Páginas</td>
-            <!--<td th:if="${#request.isUserInRole('ADMIN')}">-->
             <td>
                 <a href="#" th:href="@{'/livros/alterar/'+${livro.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>
 

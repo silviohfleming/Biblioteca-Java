@@ -34,6 +34,7 @@
         <tr th:each="autor : ${autores}">
             <td th:text="${autor.id}">1</td>
             <td th:text="${autor.nome}">Nome</td>
+            <!--  th:if="${#request.isUserInRole('ADMIN')}" -->
             <td>
                 <a href="#" th:href="@{'/autores/alterar/'+${autor.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>
 
