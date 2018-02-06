@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Emprestimos > Listar</title>
+</head>
+<body>
+<div layout:fragment="header">
+    <nav aria-label="breadcrumb" role="navigation">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">Empréstimos</li>
+        </ol>
+    </nav>
+    <p>
+        <a th:href="@{/emprestimos/novo}" class="btn btn-sm btn-info" title="Realizar Empréstimo">
+            <i class="glyphicon glyphicon-plus"></i> Realizar Empréstimo
+        </a>
+    </p>
+</div>
+<div layout:fragment="content">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Livro_ID</td>
+            <td>Usuario_ID</td>
+            <td>dataDevolucao</td>
+            <td>dataEmprestimo</td>
+            <!--<td>Ações</td>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${emprestimos.empty}">
+            <td colspan="5">Não há empréstimos cadastrados.</td>
+        </tr>
+        <tr th:each="emprestimo : ${emprestimos}">
+            <td th:text="${emprestimo.id}">1</td>
+            <td th:text="${emprestimo.livro_id}">1</td>
+            <td th:text="${emprestimo.usuario_id}">1</td>
+            <td th:text="${emprestimo.dataDevolucao}">dataDevolucao</td>
+            <td th:text="${emprestimo.dataEmprestimo}">dataEmprestimo</td>
+            <!--<td>-->
+                <!--<a href="#" th:href="@{'/livros/alterar/'+${livro.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>-->
+
+                <!--<a href="#" th:href="@{'/livros/excluir/'+${livro.id}}" class="btn btn-danger" title="Excluir" > <i class="glyphicon glyphicon-remove"></i> Excluir </a>-->
+            <!--</td>-->
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

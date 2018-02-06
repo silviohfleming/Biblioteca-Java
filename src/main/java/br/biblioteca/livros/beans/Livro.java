@@ -1,9 +1,14 @@
 package br.biblioteca.livros.beans;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Livro {
@@ -25,6 +30,10 @@ public class Livro {
     @ManyToOne
     @JoinColumn(name = "autor_id")
     private Autor autor;
+
+    @OneToMany(mappedBy="livro")
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private List<Emprestimo> emprestimos = new ArrayList<>();
 
     public Long getId() {
         return id;

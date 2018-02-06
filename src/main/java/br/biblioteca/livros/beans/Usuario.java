@@ -36,6 +36,10 @@ public class Usuario {
     @Cascade(CascadeType.SAVE_UPDATE)
     private List<Role> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy="usuario")
+    @Cascade(CascadeType.SAVE_UPDATE)
+    private List<Emprestimo> emprestimos = new ArrayList<>();
+
     @OneToMany(mappedBy = "usuario")
     private List<Review> reviews = new ArrayList<>();
 

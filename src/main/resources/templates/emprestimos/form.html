@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="layout">
+<head>
+    <meta charset="UTF-8" />
+    <title>Emprestimos > Form</title>
+</head>
+<body>
+
+<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#" th:href="@{/emprestimos/list}">Empréstimos</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Realizar</li>
+    </ol>
+</nav>
+
+
+<div layout:fragment="content" class="container col-md-6">
+    <form id="livroForm" th:action="@{/emprestimos/(form)}" method="post"
+          th:object="${emprestimo}" action="#" enctype="multipart/form-data" >
+
+        <input type="hidden" th:field="*{id}"/>
+        Data Inicio: <input type="date" th:field="*{dataEmprestimo}" /><br/>
+        Data Devolução: <input type="date" th:field="*{dataDevolucao}" /><br/>
+
+        <div class="form-group">
+            <label>Livro: </label>
+            <select th:field="*{livro}">
+                <option th:each="livro : ${livros}" th:value="${livro.id}"
+                        th:text="${livro.nome}">Nome do livro</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Usuario: </label>
+            <select th:field="*{usuario}">
+                <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
+                        th:text="${usuario.username}">Username</option>
+            </select>
+        </div>
+
+            <button type="submit" class="btn btn-info">Salvar</button>
+
+    </form>
+</div>
+</body>
+</html>
