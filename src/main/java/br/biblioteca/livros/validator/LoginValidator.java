@@ -31,5 +31,6 @@ public class LoginValidator implements Validator {
             errors.rejectValue("username", "NotExist.userForm.username");
         }
 
+
     }
 }

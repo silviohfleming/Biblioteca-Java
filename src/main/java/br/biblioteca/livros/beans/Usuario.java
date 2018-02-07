@@ -4,10 +4,7 @@ package br.biblioteca.livros.beans;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,12 +40,12 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario")
     private List<Review> reviews = new ArrayList<>();
 
-    public List<Review> getReviews() {
-        return reviews;
+    public Long getId() {
+        return id;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -73,6 +70,22 @@ public class Usuario {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 
     @Override

@@ -3,19 +3,19 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <meta charset="UTF-8" />
-    <title>Emprestimos > Listar</title>
+    <meta charset="UTF-8"/>
+    <title>Meus Emprestimos > Listar</title>
 </head>
 <body>
 <div layout:fragment="header">
     <nav aria-label="breadcrumb" role="navigation">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item active" aria-current="page">Empréstimos</li>
+            <li class="breadcrumb-item active" aria-current="page">Meus Empréstimos</li>
         </ol>
     </nav>
     <p>
         <a th:href="@{/emprestimos/novo}" class="btn btn-sm btn-info" title="Realizar Empréstimo">
-            <i class="glyphicon glyphicon-plus"></i> Realizar Empréstimo
+            <i class="glyphicon glyphicon-plus"></i> Realizar Novo Empréstimo
         </a>
     </p>
 </div>
@@ -23,29 +23,39 @@
     <table class="table table-bordered">
         <thead>
         <tr>
-            <td>ID</td>
-            <td>Livro_ID</td>
-            <td>Usuario_ID</td>
-            <td>dataDevolucao</td>
-            <td>dataEmprestimo</td>
-            <!--<td>Ações</td>-->
+            <td>#</td>
+            <td>Capa</td>
+            <td>Livro</td>
+            <td>Emprestado por</td>
+            <td>Emprestado em</td>
+            <td>Devolvido em</td>
+            <td>Ação</td>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${emprestimos.empty}">
-            <td colspan="5">Não há empréstimos cadastrados.</td>
+            <td colspan="7">Não há empréstimos realizados.</td>
         </tr>
-        <tr th:each="emprestimo : ${emprestimos}">
+        <tr th:each="emprestimo : ${emprestimos}" th:if="${emprestimo.usuario.getUsername()} == ${#httpServletRequest.remoteUser}">
             <td th:text="${emprestimo.id}">1</td>
-            <td th:text="${emprestimo.livro_id}">1</td>
-            <td th:text="${emprestimo.usuario_id}">1</td>
-            <td th:text="${emprestimo.dataDevolucao}">dataDevolucao</td>
-            <td th:text="${emprestimo.dataEmprestimo}">dataEmprestimo</td>
-            <!--<td>-->
-                <!--<a href="#" th:href="@{'/livros/alterar/'+${livro.id}}" class="btn btn-warning" title="Alterar" > <i class="glyphicon glyphicon-pencil"></i> Alterar </a>-->
+            <td>
+                <img th:if="${emprestimo.livro.getCapa()}" th:src="@{'/' + ${emprestimo.livro.getCapa()}}"
+                     width="100px"/>
+                <img th:unless="${emprestimo.livro.getCapa()}" th:src="@{'../img/unless.jpg'}" width="100px"/>
 
-                <!--<a href="#" th:href="@{'/livros/excluir/'+${livro.id}}" class="btn btn-danger" title="Excluir" > <i class="glyphicon glyphicon-remove"></i> Excluir </a>-->
-            <!--</td>-->
+            </td>
+            <td th:text="${emprestimo.livro.getNome()}">1</td>
+            <td th:text="${emprestimo.usuario.getUsername()}">1</td>
+            <td th:text="${emprestimo.dataEmprestimo}">Emprestado em</td>
+            <td th:text="${emprestimo.dataDevolucao}">Devolvido em</td>
+            <td th:if="${emprestimo.dataDevolucao} == null">
+                <a href="#" th:href="@{'/emprestimos/devolver/'+${emprestimo.id}}" class="btn btn-primary"
+                   title="Devolver"> <i class="glyphicon glyphicon-download"></i> Devolver </a>
+            </td>
+            <td th:if="${emprestimo.dataDevolucao} != null">
+                <a href="#" class="btn btn-primary" disabled="disabled" title="Devolver">
+                    <i class="glyphicon glyphicon-download"></i> Devolver </a>
+            </td>
         </tr>
         </tbody>
     </table>

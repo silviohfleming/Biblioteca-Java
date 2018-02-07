@@ -11,11 +11,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -48,9 +50,19 @@ public class UsuarioController {
             return new ModelAndView("login");
         }
 
-        securityService.login(userForm.getUsername(), userForm.getPassword());
+        try {
+            securityService.login(userForm.getUsername(), userForm.getPassword());
+            return new ModelAndView("redirect:/");
 
-        return new ModelAndView("redirect:/");
+        } catch (Exception e) {
+
+            String user;
+            user = "Senha incorreta";
+
+            return new ModelAndView("redirect:/usuarios/login?erro", "user", user);
+        }
+
+
 
     }
 
@@ -77,7 +89,7 @@ public class UsuarioController {
             return new ModelAndView("redirect:/");
 
         } catch (Exception e) {
-            return new ModelAndView("redirect:/usuarios/login");
+            return new ModelAndView("redirect:/usuarios/login?erro");
         }
     }
 

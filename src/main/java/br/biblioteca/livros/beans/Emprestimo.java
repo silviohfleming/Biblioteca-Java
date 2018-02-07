@@ -1,6 +1,7 @@
 package br.biblioteca.livros.beans;
 
 
+import com.sun.istack.internal.Nullable;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
@@ -17,19 +18,19 @@ public class Emprestimo {
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Nullable
     private Date dataEmprestimo;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Nullable
     private Date dataDevolucao;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "livro_id")
     private Livro livro;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     public Long getId() {

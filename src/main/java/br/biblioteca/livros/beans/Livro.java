@@ -38,32 +38,49 @@ public class Livro {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public int getQuantidadePaginas() {
         return quantidadePaginas;
     }
+
     public void setQuantidadePaginas(int quantidadePaginas) {
         this.quantidadePaginas = quantidadePaginas;
     }
+
     public String getCapa() {
         return capa;
     }
+
     public void setCapa(String capa) {
         this.capa = capa;
     }
+
     public Autor getAutor() {
         return autor;
     }
+
     public void setAutor(Autor autor) {
         this.autor = autor;
+    }
+
+    public List<Emprestimo> getEmprestimos() {
+        return emprestimos;
+    }
+
+    public void setEmprestimos(List<Emprestimo> emprestimos) {
+        this.emprestimos = emprestimos;
     }
 
     @Override

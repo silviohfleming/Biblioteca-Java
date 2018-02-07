@@ -3,8 +3,8 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="layout">
 <head>
-    <meta charset="UTF-8" />
-    <title>Emprestimos > Form</title>
+    <meta charset="UTF-8"/>
+    <title>Emprestimos > Realizar Novo</title>
 </head>
 <body>
 
@@ -16,33 +16,35 @@
 </nav>
 
 
-<div layout:fragment="content" class="container col-md-6">
-    <form id="livroForm" th:action="@{/emprestimos/(form)}" method="post"
-          th:object="${emprestimo}" action="#" enctype="multipart/form-data" >
-
-        <input type="hidden" th:field="*{id}"/>
-        Data Inicio: <input type="date" th:field="*{dataEmprestimo}" /><br/>
-        Data Devolução: <input type="date" th:field="*{dataDevolucao}" /><br/>
-
-        <div class="form-group">
-            <label>Livro: </label>
-            <select th:field="*{livro}">
-                <option th:each="livro : ${livros}" th:value="${livro.id}"
-                        th:text="${livro.nome}">Nome do livro</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>Usuario: </label>
-            <select th:field="*{usuario}">
-                <option th:each="usuario : ${usuarios}" th:value="${usuario.id}"
-                        th:text="${usuario.username}">Username</option>
-            </select>
-        </div>
-
-            <button type="submit" class="btn btn-info">Salvar</button>
-
-    </form>
+<div layout:fragment="content" class="container col-md-12">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>Capa</td>
+            <td>#</td>
+            <td>Título</td>
+            <td>Qtde Páginas</td>
+            <td>Ação</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${livros.empty}">
+            <td colspan="5">Não há livros disponíveis para emprestar.</td>
+        </tr>
+        <tr th:each="livro : ${livros}">
+            <td>
+                <img th:if="${livro.capa}" th:src="@{'/' + ${livro.capa}}" width="100px" />
+                <img th:unless="${livro.capa}" th:src="@{'../img/unless.jpg'}" width="100px" />
+            </td>
+            <td th:text="${livro.id}">1</td>
+            <td th:text="${livro.nome}">Título</td>
+            <td th:text="${livro.quantidadePaginas}">Quantidade de Páginas</td>
+            <td>
+                <a href="#" th:href="@{'/emprestimos/emprestar/'+${livro.id}}" class="btn btn-primary" title="Emprestar" > <i class="glyphicon glyphicon-plus"></i> Emprestar </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

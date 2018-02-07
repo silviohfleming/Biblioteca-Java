@@ -25,9 +25,9 @@
         </tr>
         </thead>
         <tbody>
-        <!--<tr th:if="${usuario.empty}">-->
-            <!--<td colspan="5">Não há usuarios cadastrados.</td>-->
-        <!--</tr>-->
+        <tr th:if="${usuarios.empty}">
+            <td colspan="2">Não há usuarios cadastrados.</td>
+        </tr>
         <tr th:each="usuario : ${usuarios}">
             <td th:text="${usuario.username}">Username</td>
             <td th:text="${usuario.password}">Password</td>
