@@ -1,6 +1,8 @@
 package br.biblioteca.livros;
 
+import org.h2.server.web.WebServlet;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -10,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 @Configuration
 @EnableWebSecurity
@@ -29,10 +32,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    @Bean
+    ServletRegistrationBean h2servletRegistration(){
+        ServletRegistrationBean registrationBean = new ServletRegistrationBean( new WebServlet());
+        registrationBean.addUrlMappings("/console/*");
+        return registrationBean;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable()
-                .authorizeRequests()
+        http.csrf().disable();
+        http.headers().frameOptions().disable();
+        http.authorizeRequests()
+                .antMatchers("/console/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/usuarios/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/usuarios/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/usuarios/autentication").permitAll()
@@ -43,6 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and().formLogin().loginPage("/usuarios/login").permitAll()
                 .and().logout().permitAll();
+
     }
 
 
