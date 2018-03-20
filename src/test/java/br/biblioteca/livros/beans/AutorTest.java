@@ -66,9 +66,14 @@ public class AutorTest {
     @Test
     public void deveExcluirAutorPeloNome()
     {
-//        autor = autorRepository.findByNome("Ariano Suassuna");
-//        autorRepository.delete(autor);
-//        assertThat(autor).isNull();
+        criaAutor();
+        autor.setId(4L);
+        autor.setNome("Papito");
+        autorRepository.save(autor);
+        autor = autorRepository.findByNome("Papito");
+        autorRepository.delete(autor);
+        autor = autorRepository.findByNome("Papito");
+        assertThat(autor).isNull();
     }
 
 }
